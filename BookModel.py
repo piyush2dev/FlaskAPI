@@ -13,8 +13,9 @@ class Books(db.Model):
     price = db.Column(db.Float, nullable=False)
     isbn = db.Column(db.Integer)
 
+
 def json(self):
-    return {'name': self.name , 'price': self.price , 'isbn':self.isbn}
+    return {'name': self.name, 'price': self.price, 'isbn': self.isbn}
 
 
 def add_Book(_name, _price, _isbn):
@@ -24,17 +25,18 @@ def add_Book(_name, _price, _isbn):
 
 
 def get_all_book():
-    return[Books.json(book) for book in Books.query.all()]
+    return [json(book) for book in Books.query.all()]
 
 
 def get_Book(_isbn):
-    return Books.query.filter_by(isbn=_isbn).first()
+    return json(Books.query.filter_by(isbn = _isbn).first())
 
 
 # delete book by isbn
 def delete_book(_isbn):
-    Books.query.filter_by(isbn=_isbn).delete()
+    is_sucess =  Books.query.filter_by(isbn=_isbn).delete()
     db.session.commit()
+    return bool(is_sucess)
 
 
 def book_update_price(_isbn, _price):
@@ -48,7 +50,8 @@ def book_update_name(_isbn, _name):
     book_to_update.name = _name
     db.session.commit()
 
-def book_replace(_isbn, _name,_price):
+
+def book_replace(_isbn, _name, _price):
     book_to_replace = Books.query.filter_by(isbn=_isbn).first()
     book_to_replace.name = _name
     book_to_replace.price = _price
