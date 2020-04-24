@@ -60,8 +60,8 @@ def book_replace(_isbn, _name, _price):
 
 def __repr__(self):
     book_object = {
-        "name": self.name,
-        "price": self.price,
-        "isbn": self.isbn
+        'name': self.name,
+        'price': self.price,
+        'isbn': self.isbn
     }
     return json.dumps(book_object)
