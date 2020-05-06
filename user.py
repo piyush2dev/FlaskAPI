@@ -33,8 +33,4 @@ def username_password_match(_username, _password):
     user = User.query.filter_by(username=_username).filter_by(password=_password).first()
     if user is None:
         return False
-    else:
-        return True
-
-
-
+    return True
